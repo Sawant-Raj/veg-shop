@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import AddItem from "./components/AddItem";
 
-function App() {
+const App = () => {
+  const [itemList, setItemList] = useState([]);
+
+  const addItemHandler = (name, price, quantity) => {
+    setUsersList((prevItemList) => {
+      return [
+        ...prevItemList,
+        {
+          name: name,
+          price: price,
+          quantity: quantity,
+          id: Math.random().toString(),
+        },
+      ]; //creating a new object for every user and adding that to usersList array
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <AddItem onAddItem={addItemHandler} />
     </div>
   );
-}
+};
 
 export default App;
